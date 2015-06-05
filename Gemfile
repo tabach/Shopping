@@ -43,3 +43,12 @@ group :development, :test do
   gem 'spring'
 end
 
+#upload image
+gem 'carrierwave'
+gem 'cloudinary'
+#front-end 
+gem 'bootstrap-sass'
+#login
+gem 'devise'
+gem 'omniauth-facebook'
+

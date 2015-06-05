@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: winternight
+  api_key: '831628588651842'
+  api_secret: o7Gc79do3NrXJ5URujmlICZOfK0
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: winternight
+  api_key: '831628588651842'
+  api_secret: o7Gc79do3NrXJ5URujmlICZOfK0
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: winternight
+  api_key: '831628588651842'
+  api_secret: o7Gc79do3NrXJ5URujmlICZOfK0
+  enhance_image_tag: true
+  static_image_support: false
