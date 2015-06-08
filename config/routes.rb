@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
+
   devise_for :users
   resources :products
   # The priority is based upon order of creation: first created -> highest priority.
