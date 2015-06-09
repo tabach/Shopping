@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
 
   #devise
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
-  protected
+  before_action :find_current_order
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password,
@@ -14,14 +13,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password,
       :password_confirmation, :current_password, :avatar, :avatar_cache) }
   end
-  #cart
-helper_method :current_order
+
+  helper_method :current_order
 
   def current_order
-    if !session[:order_id].nil?
-      Order.find(session[:order_id])
-    else
-      Order.new
-    end
+    @order || Order.new
+  end
+
+  private
+  def find_current_order
+    @order = Order.find_by_id(session[:order_id])
+    @order = Order.new if @order.blank?
   end
 end

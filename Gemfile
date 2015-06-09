@@ -51,4 +51,8 @@ gem 'bootstrap-sass'
 #login
 gem 'devise'
 gem 'omniauth-facebook'
+#payment
+gem 'braintree'
+gem 'figaro'
+gem 'gon'
 

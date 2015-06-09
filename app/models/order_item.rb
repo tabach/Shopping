@@ -1,12 +1,12 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :product
-  belongs_to :order, dependent: :destroy
+  belongs_to :order
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :product_present
   validate :order_present
-  validates :product_id, uniqueness: { scope: :order_id,
-    message: "should happen once per order" }
+  # validates :product_id, uniqueness: { scope: :order_id,
+  #   message: "should happen once per order" }
   before_save :finalize
 
   def unit_price

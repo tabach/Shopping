@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'transactions/new'
+
   resource :cart, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
+  resources :transactions, only: [:new, :create]
 
   devise_for :users
   resources :products

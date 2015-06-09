@@ -2,20 +2,19 @@
 <div class="container">
     <h1 class="cart-text"><%= render 'layouts/cart_text' %></h1>
 <p id="notice"><%= notice %></p>
-<% @products.in_groups_of(3, false).each do |group| %>
-  <div class='row'>
-    <% group.each do |product| %>
-      <div class='col-md-4'>
+<% @products.each do |product| %>
+  <div class='col-md-4'>
         <%= link_to product_path(product) do %>
-        <%= image_tag(product.image_url, class: "img-responsive") %>
+          <%= image_tag(product.image_url, class: "img-responsive") %>
         <% end %>
         <h3><%= product.title %></h3>
         <div><%= sanitize(product.description) %></div>
         <div><%= number_to_currency(product.price) %></div> 
-  <%= form_for @order_item, remote: true do |f| %>
-      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency product.price %></span></h4>
+  <%= form_for OrderItem.new, remote: true do |f| %>
+        <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency product.price %></span></h4>
         <div class="input-group">
-          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          <% quantity = @order_items[product.id].try(:quantity) || 1 %>
+          <%= f.number_field :quantity, value: quantity, class: "form-control", min: 1 %>
           <div class="input-group-btn">
             <%= f.hidden_field :product_id, value: product.id %>
             <%= f.submit "Add to Cart", class: "btn btn-primary" %>
@@ -23,9 +22,5 @@
         </div>
       <% end %>
       </div>
-    <% end %>
-  </div>
 <% end %>
-
-
 <%= link_to 'New Product', new_product_path %>
